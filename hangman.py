@@ -96,6 +96,7 @@ def match_with_gaps(word1, word2):
     word1_new = "".join(list_word1)    
     return(word1_new == word2)
     
+    
 def show_possible_matches(word1): 
     possible_matches = []
     for word in wordlist: 
@@ -105,4 +106,69 @@ def show_possible_matches(word1):
         print("No matches found")
     else: 
         print("Possible matches are:" possible_matches)
+        
+def string_unique_letters(word): 
+    """This function takes in a word -a string- and returns the 
+    number of unique letters in the string."""
+    unique_letters = ''
+    for char in word[:]: 
+        if char not in unique_letters: 
+            unique_letters += (char)
+    return len(unique_letters)  
+
+def Hangman(secret_word): 
+    NUMBER_OF_GUESSES = 6
+    NUMBER_OF_WARNINGS = 3
+    letters_guessed = []
+    print("Welcome to the game Hangman, where you are surely going to lose. WUAHAHAHA")
+    print("I am thinking of a word that is", len(secret_word), "letters long")
+    print("You have", NUMBER_OF_WARNINGS, "warnings left")
+    while True: 
+    
+        print("-----------------------------------------------")
+        print("You have", NUMBER_OF_GUESSES, "guesses left")
+        print("Available letters: ", get_available_letters(letters_guessed))
+        user_guess = input("Please guess a letter: ").lower()
+        
+        
+        if user_guess in string.ascii_lowercase: 
+            if user_guess in letters_guessed:
+                if NUMBER_OF_WARNINGS > 0: 
+                    NUMBER_OF_WARNINGS -=1
+                else: 
+                    NUMBER_OF_GUESSES -=1 
+                print("You have already guessed that letter. You have" , NUMBER_OF_WARNINGS, "warnings left:")
+                print(get_guessed_word(secret_word, letters_guessed))
+            else: 
+                letters_guessed.append(user_guess)
+                if user_guess in secret_word: 
+                    print("Good guess:", get_guessed_word(secret_word, letters_guessed))
+                else: 
+                    if user_guess in 'aeiou': 
+                        NUMBER_OF_GUESSES -=2
+                    else: 
+                        NUMBER_OF_GUESSES -=1
+                    print("Not a good guess:", get_guessed_word(secret_word, letters_guessed))
+            
+        else: 
+            if NUMBER_OF_WARNINGS > 0: 
+                NUMBER_OF_WARNINGS -=1
+            else: NUMBER_OF_GUESSES -=1
+            print("You can only input an alphabet. You have", NUMBER_OF_WARNINGS, "warnings left:")
+            print(get_guessed_word(secret_word, letters_guessed))
+             
+        
+        if NUMBER_OF_WARNINGS == 0: 
+            NUMBER_OF_GUESSES -= 1
+            
+        if NUMBER_OF_GUESSES ==0:    
+            print("Im kinda sorry you lost. The word is:", secret_word)
+            break
+        if is_word_guessed(secret_word, letters_guessed): 
+            print("You guessed the word. Congrats!")
+            print("Your total score for this game is", NUMBER_OF_GUESSES*string_unique_letters(secret_word))
+            break
+           
+
+
  

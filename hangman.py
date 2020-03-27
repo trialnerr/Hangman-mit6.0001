@@ -1,4 +1,5 @@
 import random
+import string
 
 
 WORDLIST_FILENAME = "words.txt"
@@ -72,4 +73,13 @@ def get_guessed_word(secret_word, letters_guessed):
     return guessed
 
 
+def get_available_letters(letters_guessed):
+    '''
+    letters_guessed: list (of letters), which letters have been guessed so far
+    returns: string (of letters), comprised of letters that represents which letters have not
+      yet been guessed.
+    '''
+    lst = [char for char in string.ascii_lowercase if char not in letters_guessed]  
+    return "".join([str(char) for char in lst])
+    
 

@@ -96,4 +96,13 @@ def match_with_gaps(word1, word2):
     word1_new = "".join(list_word1)    
     return(word1_new == word2)
     
-
+def show_possible_matches(word1): 
+    possible_matches = []
+    for word in wordlist: 
+        if match_with_gaps(word1, word): 
+            possible_matches.append(word)
+    if len(possible_matches)==0: 
+        print("No matches found")
+    else: 
+        print("Possible matches are:" possible_matches)
+ 

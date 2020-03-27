@@ -105,7 +105,7 @@ def show_possible_matches(word1):
     if len(possible_matches)==0: 
         print("No matches found")
     else: 
-        print("Possible matches are:" possible_matches)
+        print("Possible matches are:" ,  possible_matches)
         
 def string_unique_letters(word): 
     """This function takes in a word -a string- and returns the 

@@ -81,5 +81,19 @@ def get_available_letters(letters_guessed):
     '''
     lst = [char for char in string.ascii_lowercase if char not in letters_guessed]  
     return "".join([str(char) for char in lst])
+
+
+def match_with_gaps(word1, word2): 
+    word1_stripped = word1.replace(" ", "")
+    length_of_word = len(word1)
+    if len(word2)==length_of_word: 
+        
+        list_word1 = list(word1)
+        list_word2 = list(word2)
+        for i in range(0, (len(word2))):    
+            if word1[i] == "_" : 
+                list_word1[i] = list_word2[i]          
+    word1_new = "".join(list_word1)    
+    return(word1_new == word2)
     
 

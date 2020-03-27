@@ -53,3 +53,23 @@ def is_word_guessed(secret_word, letters_guessed):
         if char in letters_guessed: 
             guessed.append(char)
     return len(guessed) == len(secret_word)
+
+
+def get_guessed_word(secret_word, letters_guessed):
+    '''
+    secret_word: string, the word the user is guessing
+    letters_guessed: list (of letters), which letters have been guessed so far
+    returns: string, comprised of letters, underscores (_), and spaces that represents
+      which letters in secret_word have been guessed so far.
+    '''
+
+    guessed = ''
+    for char in secret_word:   
+        if char in letters_guessed: 
+            guessed += char
+        else: 
+            guessed += " _ "
+    return guessed
+
+
+

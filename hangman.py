@@ -167,8 +167,9 @@ def Hangman(secret_word):
         if is_word_guessed(secret_word, letters_guessed): 
             print("You guessed the word. Congrats!")
             print("Your total score for this game is", NUMBER_OF_GUESSES*string_unique_letters(secret_word))
-            break
-           
+            break           
 
-
+if __name__== "__main__":
+    secret_word= choose_word(wordlist)
+    Hangman(secret_word)
  

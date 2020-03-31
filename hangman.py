@@ -82,20 +82,45 @@ def get_available_letters(letters_guessed):
     lst = [char for char in string.ascii_lowercase if char not in letters_guessed]  
     return "".join([str(char) for char in lst])
 
-
-def match_with_gaps(word1, word2): 
-    word1_stripped = word1.replace(" ", "")
-    length_of_word = len(word1)
-    if len(word2)==length_of_word: 
+def match_with_gaps(my_word, other_word):
+        """Takes in two strings, my_word and other_word
+        my_word is an instance of a guessed word, i.e it may have some _'s in places e.g. 't__t' . 
+        other_word is a complete English word. It returns True  if the guessed letters in my_word match the corresponding letters 
+        of other_word."""
+    my_word_stripped = my_word.replace(" ", "")
+      
+    if len(my_word_stripped) == len(other_word):
         
-        list_word1 = list(word1)
-        list_word2 = list(word2)
-        for i in range(0, (len(word2))):    
-            if word1[i] == "_" : 
-                list_word1[i] = list_word2[i]          
-    word1_new = "".join(list_word1)    
-    return(word1_new == word2)
+        list_my_word = list(my_word_stripped)
+        list_other_word = list(other_word)
+        
+        for i in range(0, (len(my_word_stripped))):    
+            if my_word_stripped[i] == "_" : 
+                list_my_word[i] = list_other_word[i]          
+        word_new = "".join(list_my_word)    
+        
+    else: 
+        return False
+        
+    return (word_new == other_word)
+
+def show_possible_matches(my_word): 
+    """Takes in a string -my_word- which is an instance of a guessed word. It prints out all the words in wordlist 
+    that match my_word. It prints\"No matches found\" if there are no matches"""
+    global list_my_word
+    global list_other_word
+    global word_new
     
+    possible_matches = []
+    for other_word in wordlist: 
+        if match_with_gaps(my_word, other_word): 
+            possible_matches.append(other_word)
+        else: 
+            continue
+    if len(possible_matches) == 0: 
+        print("No matches found")
+    else: 
+        print("Possible matches are:" , " ".join(possible_matches))    
     
 def show_possible_matches(word1): 
     possible_matches = []

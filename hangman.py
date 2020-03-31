@@ -174,6 +174,8 @@ def Hangman(secret_word):
                     else: 
                         NUMBER_OF_GUESSES -=1
                     print("Not a good guess:", get_guessed_word(secret_word, letters_guessed))
+        elif user_input = '*': 
+            show_possible_matches(get_guessed_word(secret_word, letters_guessed))
             
         else: 
             if NUMBER_OF_WARNINGS > 0: 

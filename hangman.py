@@ -1,3 +1,14 @@
+# Problem Set 2, hangman.py
+# Name: Bonginkosi Sibanda
+# Collaborators:
+# Time spent:
+
+# Hangman Game
+# -----------------------------------
+# Helper code
+# You don't need to understand this helper code,
+# but you will have to know how to use the functions
+# (so be sure to read the docstrings!)
 import random
 import string
 
@@ -83,7 +94,7 @@ def get_available_letters(letters_guessed):
     return "".join([str(char) for char in lst])
 
 def match_with_gaps(my_word, other_word):
-        """Takes in two strings, my_word and other_word
+    """Takes in two strings, my_word and other_word
         my_word is an instance of a guessed word, i.e it may have some _'s in places e.g. 't__t' . 
         other_word is a complete English word. It returns True  if the guessed letters in my_word match the corresponding letters 
         of other_word."""
@@ -121,16 +132,6 @@ def show_possible_matches(my_word):
         print("No matches found")
     else: 
         print("Possible matches are:" , " ".join(possible_matches))    
-    
-def show_possible_matches(word1): 
-    possible_matches = []
-    for word in wordlist: 
-        if match_with_gaps(word1, word): 
-            possible_matches.append(word)
-    if len(possible_matches)==0: 
-        print("No matches found")
-    else: 
-        print("Possible matches are:" ,  possible_matches)
         
 def string_unique_letters(word): 
     """This function takes in a word -a string- and returns the 
@@ -141,7 +142,10 @@ def string_unique_letters(word):
             unique_letters += (char)
     return len(unique_letters)  
 
-def Hangman(secret_word): 
+
+def Hangman(secret_word):
+    """ Hangman game start with 6 guesses and 3 warnings. 
+    Input must be alphabet, if not player loses 1 warning. Player also loses """
     NUMBER_OF_GUESSES = 6
     NUMBER_OF_WARNINGS = 3
     letters_guessed = []
@@ -153,7 +157,8 @@ def Hangman(secret_word):
         print("-----------------------------------------------")
         print("You have", NUMBER_OF_GUESSES, "guesses left")
         print("Available letters: ", get_available_letters(letters_guessed))
-        user_guess = input("Please guess a letter: ").lower()
+        user_guess = input("Please guess a letter: ")
+        user_guess = user_guess.lower()
         
         
         if user_guess in string.ascii_lowercase: 
@@ -174,19 +179,17 @@ def Hangman(secret_word):
                     else: 
                         NUMBER_OF_GUESSES -=1
                     print("Not a good guess:", get_guessed_word(secret_word, letters_guessed))
-        elif user_input = '*': 
+        elif user_guess == '*': 
             show_possible_matches(get_guessed_word(secret_word, letters_guessed))
             
         else: 
             if NUMBER_OF_WARNINGS > 0: 
                 NUMBER_OF_WARNINGS -=1
-            else: NUMBER_OF_GUESSES -=1
+            else:
+                NUMBER_OF_GUESSES-=1
+            
             print("You can only input an alphabet. You have", NUMBER_OF_WARNINGS, "warnings left:")
             print(get_guessed_word(secret_word, letters_guessed))
-             
-        
-        if NUMBER_OF_WARNINGS == 0: 
-            NUMBER_OF_GUESSES -= 1
             
         if NUMBER_OF_GUESSES ==0:    
             print("Im kinda sorry you lost. The word is:", secret_word)
